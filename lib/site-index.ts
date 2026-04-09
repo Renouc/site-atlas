@@ -63,7 +63,7 @@ export function filterSites(
   });
 }
 
-export function splitPinnedSites(
+export function prioritizePinnedSites(
   sites: readonly SiteRecord[],
   pinnedSiteIds: readonly string[]
 ) {
@@ -71,30 +71,20 @@ export function splitPinnedSites(
     pinnedSiteIds.map((siteId, index) => [siteId, index] as const)
   );
 
-  const pinnedSites: SiteRecord[] = [];
-  const regularSites: SiteRecord[] = [];
+  return [...sites].sort((left, right) => {
+    const leftIndex = pinnedIndex.get(left.id);
+    const rightIndex = pinnedIndex.get(right.id);
+    const leftPinned = leftIndex !== undefined;
+    const rightPinned = rightIndex !== undefined;
 
-  for (const site of sites) {
-    if (pinnedIndex.has(site.id)) {
-      pinnedSites.push(site);
-    } else {
-      regularSites.push(site);
-    }
-  }
-
-  pinnedSites.sort((left, right) => {
-    const leftIndex = pinnedIndex.get(left.id) ?? Number.MAX_SAFE_INTEGER;
-    const rightIndex = pinnedIndex.get(right.id) ?? Number.MAX_SAFE_INTEGER;
-
-    if (leftIndex !== rightIndex) {
+    if (leftPinned && rightPinned && leftIndex !== rightIndex) {
       return leftIndex - rightIndex;
+    }
+
+    if (leftPinned !== rightPinned) {
+      return leftPinned ? -1 : 1;
     }
 
     return compareSites(left, right);
   });
-
-  return {
-    pinnedSites,
-    regularSites,
-  };
 }

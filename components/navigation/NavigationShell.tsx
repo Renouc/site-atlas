@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FolderOpen, Sparkles } from "lucide-react";
+import { FolderOpen } from "lucide-react";
 
 import CategoryTabs from "@/components/navigation/CategoryTabs";
 import SearchBar from "@/components/navigation/SearchBar";
@@ -12,7 +12,7 @@ import {
   togglePinnedSiteId,
   writePinnedSiteIds,
 } from "@/lib/pinned-sites";
-import { filterSites, splitPinnedSites } from "@/lib/site-index";
+import { filterSites, prioritizePinnedSites } from "@/lib/site-index";
 import { ALL_CATEGORY } from "@/types/site";
 import type { SiteCategory, SiteCategoryFilter, SiteRecord } from "@/types/site";
 
@@ -53,15 +53,18 @@ export default function NavigationShell({
     [searchTerm, selectedCategory, sites]
   );
 
-  const { pinnedSites, regularSites } = useMemo(
-    () => splitPinnedSites(filteredSites, pinnedSiteIds),
+  const visibleSites = useMemo(
+    () => prioritizePinnedSites(filteredSites, pinnedSiteIds),
     [filteredSites, pinnedSiteIds]
+  );
+
+  const pinnedSiteIdSet = useMemo(
+    () => new Set(pinnedSiteIds),
+    [pinnedSiteIds]
   );
 
   const hasActiveFilters =
     searchTerm.trim().length > 0 || selectedCategory !== ALL_CATEGORY;
-  const hasPinnedSites = pinnedSites.length > 0;
-  const visibleResultSites = hasPinnedSites ? regularSites : filteredSites;
 
   const handleTogglePin = useCallback(
     (siteId: string) => {
@@ -99,31 +102,6 @@ export default function NavigationShell({
         onSelect={setSelectedCategory}
       />
 
-      {hasPinnedSites ? (
-        <section className="space-y-4">
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-              <Sparkles className="h-4 w-4 text-amber-500" strokeWidth={2} />
-              常用置顶
-            </h2>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
-              {pinnedSites.length} 个
-            </span>
-          </div>
-          <div className="grid gap-3 lg:grid-cols-2">
-            {pinnedSites.map((site) => (
-              <SiteCard
-                key={site.id}
-                site={site}
-                isPinned
-                onTogglePin={handleTogglePin}
-              />
-            ))}
-          </div>
-          <hr className="border-slate-200 dark:border-slate-700" />
-        </section>
-      ) : null}
-
       {filteredSites.length === 0 ? (
         <section className="rounded-2xl border border-dashed border-slate-300 bg-white/70 px-6 py-12 text-center dark:border-slate-600 dark:bg-slate-800/50">
           <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-300">
@@ -138,7 +116,7 @@ export default function NavigationShell({
         </section>
       ) : null}
 
-      {visibleResultSites.length > 0 ? (
+      {visibleSites.length > 0 ? (
         <section className="space-y-4">
           <div className="flex items-center justify-between gap-4">
             <h2 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
@@ -146,15 +124,15 @@ export default function NavigationShell({
               {hasActiveFilters ? "筛选结果" : "全部站点"}
             </h2>
             <span className="text-xs text-slate-500 dark:text-slate-400">
-              {visibleResultSites.length} 个
+              {visibleSites.length} 个
             </span>
           </div>
           <div className="grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
-            {visibleResultSites.map((site) => (
+            {visibleSites.map((site) => (
               <SiteCard
                 key={site.id}
                 site={site}
-                isPinned={pinnedSiteIds.includes(site.id)}
+                isPinned={pinnedSiteIdSet.has(site.id)}
                 onTogglePin={handleTogglePin}
               />
             ))}
