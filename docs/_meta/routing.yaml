@@ -87,6 +87,7 @@ task_routes:
       - docs/engineering/DATA_MODEL.md
       - docs/engineering/TECH_DECISIONS/ADR-001-knowledge-governance.md
       - docs/engineering/TECH_DECISIONS/ADR-002-repo-local-content-source.md
+      - docs/engineering/TECH_DECISIONS/ADR-003-local-preference-pinning.md
     must_update:
       - docs/engineering/DATA_MODEL.md
       - docs/engineering/ARCHITECTURE.md

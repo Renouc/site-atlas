@@ -5,7 +5,7 @@ entrypoints:
   repo_rules: AGENTS.md
   docs_home: docs/README.md
   constitution: docs/_meta/CONSTITUTION.md
-  active_work_item: docs/delivery/work-items/WI-001-knowledge-governance/
+  active_work_item: docs/delivery/work-items/WI-002-homepage-mvp/
 
 assets:
   - id: foundation.project-charter
@@ -160,6 +160,18 @@ assets:
     owns:
       - 内容源决策
 
+  - id: engineering.adr-003
+    type: adr
+    authority: canonical
+    path: docs/engineering/TECH_DECISIONS/ADR-003-local-preference-pinning.md
+    scope: current-mvp
+    status: accepted
+    upstream:
+      - engineering.architecture
+      - engineering.data-model
+    owns:
+      - 置顶偏好分层决策
+
   - id: delivery.roadmap
     type: roadmap
     authority: canonical
@@ -204,11 +216,31 @@ assets:
     authority: active_work_item
     path: docs/delivery/work-items/WI-001-knowledge-governance/
     scope: current-task
-    status: active
+    status: completed
     owns:
       - 本轮边界
       - 本轮验收
       - 本轮复盘
+
+  - id: delivery.wi-002
+    type: work-item
+    authority: active_work_item
+    path: docs/delivery/work-items/WI-002-homepage-mvp/
+    scope: current-task
+    status: active
+    upstream:
+      - product.prd
+      - product.ia
+      - design.ux-rules
+      - design.home-page-spec
+      - engineering.architecture
+      - engineering.data-model
+      - delivery.roadmap
+    owns:
+      - 首页 MVP 边界
+      - 首页 MVP 计划
+      - 首页 MVP 验收
+      - 首页 MVP 复盘
 
 templates:
   - templates/doc-template-prd.md
