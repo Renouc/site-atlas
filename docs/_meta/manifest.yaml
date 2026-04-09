@@ -1,0 +1,216 @@
+version: 1
+updated_at: 2026-04-09
+
+entrypoints:
+  repo_rules: AGENTS.md
+  docs_home: docs/README.md
+  constitution: docs/_meta/CONSTITUTION.md
+  active_work_item: docs/delivery/work-items/WI-001-knowledge-governance/
+
+assets:
+  - id: foundation.project-charter
+    type: charter
+    authority: canonical
+    path: docs/foundation/PROJECT_CHARTER.md
+    scope: whole-project
+    status: active
+    owns:
+      - 项目定义
+      - 目标用户
+      - 成功标准
+      - 非目标
+
+  - id: foundation.principles
+    type: principles
+    authority: canonical
+    path: docs/foundation/PRINCIPLES.md
+    scope: whole-project
+    status: active
+    owns:
+      - 产品原则
+      - 信息原则
+      - 架构原则
+      - 维护原则
+
+  - id: foundation.glossary
+    type: glossary
+    authority: canonical
+    path: docs/foundation/GLOSSARY.md
+    scope: whole-project
+    status: active
+    owns:
+      - 关键术语
+
+  - id: product.vision
+    type: vision
+    authority: canonical
+    path: docs/product/VISION.md
+    scope: product
+    status: active
+    upstream:
+      - foundation.project-charter
+    owns:
+      - 产品价值
+      - 长期方向
+
+  - id: product.prd
+    type: prd
+    authority: canonical
+    path: docs/product/PRD.md
+    scope: current-mvp
+    status: active
+    upstream:
+      - foundation.project-charter
+      - product.vision
+    owns:
+      - MVP 范围
+      - 功能边界
+      - 验收标准
+
+  - id: product.ia
+    type: ia
+    authority: canonical
+    path: docs/product/IA.md
+    scope: current-mvp
+    status: active
+    upstream:
+      - product.prd
+    owns:
+      - 分类体系
+      - 标签策略
+      - 页面信息组织
+
+  - id: design.ux-rules
+    type: ux-rules
+    authority: canonical
+    path: docs/design/UX_RULES.md
+    scope: current-mvp
+    status: active
+    upstream:
+      - product.prd
+      - product.ia
+    owns:
+      - 搜索规则
+      - 筛选规则
+      - 空状态
+
+  - id: design.home-page-spec
+    type: page-spec
+    authority: canonical
+    path: docs/design/PAGE_SPECS/HOME.md
+    scope: homepage
+    status: active
+    upstream:
+      - product.prd
+      - product.ia
+      - design.ux-rules
+    owns:
+      - 首页区块
+      - 首页行为
+      - 首页验收口径
+
+  - id: engineering.architecture
+    type: architecture
+    authority: canonical
+    path: docs/engineering/ARCHITECTURE.md
+    scope: current-mvp
+    status: active
+    upstream:
+      - product.prd
+      - design.home-page-spec
+    owns:
+      - 模块分层
+      - 渲染策略
+      - 数据流
+
+  - id: engineering.data-model
+    type: data-model
+    authority: canonical
+    path: docs/engineering/DATA_MODEL.md
+    scope: current-mvp
+    status: active
+    upstream:
+      - product.ia
+      - engineering.architecture
+    owns:
+      - 站点字段
+      - 约束
+      - 示例
+
+  - id: engineering.adr-001
+    type: adr
+    authority: canonical
+    path: docs/engineering/TECH_DECISIONS/ADR-001-knowledge-governance.md
+    scope: whole-project
+    status: accepted
+    upstream:
+      - engineering.architecture
+    owns:
+      - 知识治理决策
+
+  - id: engineering.adr-002
+    type: adr
+    authority: canonical
+    path: docs/engineering/TECH_DECISIONS/ADR-002-repo-local-content-source.md
+    scope: current-mvp
+    status: accepted
+    upstream:
+      - engineering.architecture
+      - engineering.data-model
+    owns:
+      - 内容源决策
+
+  - id: delivery.roadmap
+    type: roadmap
+    authority: canonical
+    path: docs/delivery/ROADMAP.md
+    scope: whole-project
+    status: active
+    upstream:
+      - foundation.project-charter
+      - product.vision
+    owns:
+      - 阶段规划
+      - 优先级
+
+  - id: operations.maintenance
+    type: maintenance
+    authority: canonical
+    path: docs/operations/MAINTENANCE.md
+    scope: ongoing-operations
+    status: active
+    upstream:
+      - product.ia
+      - engineering.data-model
+    owns:
+      - 新增站点流程
+      - 分类与标签维护规则
+
+  - id: operations.content-workflow
+    type: workflow
+    authority: canonical
+    path: docs/operations/CONTENT_WORKFLOW.md
+    scope: ongoing-operations
+    status: active
+    upstream:
+      - operations.maintenance
+      - delivery.roadmap
+    owns:
+      - 任务流转
+      - 回写流程
+
+  - id: delivery.wi-001
+    type: work-item
+    authority: active_work_item
+    path: docs/delivery/work-items/WI-001-knowledge-governance/
+    scope: current-task
+    status: active
+    owns:
+      - 本轮边界
+      - 本轮验收
+      - 本轮复盘
+
+templates:
+  - templates/doc-template-prd.md
+  - templates/doc-template-adr.md
+  - templates/doc-template-page-spec.md

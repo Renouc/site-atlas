@@ -1,0 +1,108 @@
+version: 1
+updated_at: 2026-04-09
+
+default_read_order:
+  - AGENTS.md
+  - docs/_meta/CONSTITUTION.md
+  - docs/_meta/authority.yaml
+  - docs/_meta/routing.yaml
+  - docs/_meta/manifest.yaml
+  - docs/delivery/work-items/<current>/
+
+task_routes:
+  governance_system:
+    when:
+      - 新建或调整知识库体系
+      - 修改 AGENTS 约束
+      - 调整文档优先级、任务协议、回写规则
+    read:
+      - docs/foundation/PROJECT_CHARTER.md
+      - docs/foundation/PRINCIPLES.md
+      - docs/delivery/ROADMAP.md
+    must_update:
+      - docs/_meta/CONSTITUTION.md
+      - docs/_meta/authority.yaml
+      - docs/_meta/routing.yaml
+      - docs/_meta/manifest.yaml
+      - docs/delivery/work-items/<current>/review.md
+
+  product_planning:
+    when:
+      - 调整目标用户
+      - 调整产品方向
+      - 调整阶段范围
+    read:
+      - docs/foundation/PROJECT_CHARTER.md
+      - docs/product/VISION.md
+      - docs/product/PRD.md
+      - docs/delivery/ROADMAP.md
+    must_update:
+      - docs/product/VISION.md
+      - docs/product/PRD.md
+      - docs/delivery/ROADMAP.md
+      - docs/delivery/work-items/<current>/review.md
+
+  information_architecture:
+    when:
+      - 调整分类体系
+      - 调整标签策略
+      - 调整首页信息组织
+    read:
+      - docs/product/PRD.md
+      - docs/product/IA.md
+      - docs/design/PAGE_SPECS/HOME.md
+      - docs/engineering/DATA_MODEL.md
+    must_update:
+      - docs/product/IA.md
+      - docs/design/PAGE_SPECS/HOME.md
+      - docs/engineering/DATA_MODEL.md
+      - docs/delivery/work-items/<current>/review.md
+
+  homepage_experience:
+    when:
+      - 调整首页布局
+      - 调整搜索与筛选体验
+      - 实现或修改首页功能
+    read:
+      - docs/product/PRD.md
+      - docs/product/IA.md
+      - docs/design/UX_RULES.md
+      - docs/design/PAGE_SPECS/HOME.md
+      - docs/engineering/ARCHITECTURE.md
+      - docs/engineering/DATA_MODEL.md
+    must_update:
+      - docs/design/UX_RULES.md
+      - docs/design/PAGE_SPECS/HOME.md
+      - docs/engineering/ARCHITECTURE.md
+      - docs/delivery/work-items/<current>/review.md
+
+  data_model_change:
+    when:
+      - 新增或删除字段
+      - 修改字段语义或约束
+      - 引入新数据源
+    read:
+      - docs/product/PRD.md
+      - docs/product/IA.md
+      - docs/engineering/DATA_MODEL.md
+      - docs/engineering/TECH_DECISIONS/ADR-001-knowledge-governance.md
+      - docs/engineering/TECH_DECISIONS/ADR-002-repo-local-content-source.md
+    must_update:
+      - docs/engineering/DATA_MODEL.md
+      - docs/engineering/ARCHITECTURE.md
+      - docs/engineering/TECH_DECISIONS/
+      - docs/delivery/work-items/<current>/review.md
+
+  operations_change:
+    when:
+      - 调整新增站点流程
+      - 调整分类/标签维护规则
+      - 调整发布与检查流程
+    read:
+      - docs/operations/MAINTENANCE.md
+      - docs/operations/CONTENT_WORKFLOW.md
+      - docs/engineering/DATA_MODEL.md
+    must_update:
+      - docs/operations/MAINTENANCE.md
+      - docs/operations/CONTENT_WORKFLOW.md
+      - docs/delivery/work-items/<current>/review.md

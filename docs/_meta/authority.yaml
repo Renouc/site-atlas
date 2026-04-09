@@ -1,0 +1,78 @@
+version: 1
+updated_at: 2026-04-09
+
+priority_order:
+  - level: 1
+    name: runtime_instructions
+    description: 系统、开发者、用户在当前对话中的直接指令
+  - level: 2
+    name: repo_agent_rules
+    description: 仓库根级 `AGENTS.md`
+  - level: 3
+    name: constitution
+    description: `docs/_meta/CONSTITUTION.md`
+  - level: 4
+    name: active_work_item
+    description: 当前任务对应的工作单及其验收口径
+  - level: 5
+    name: canonical_assets
+    description: 项目权威资产，例如 PRD、IA、DATA_MODEL、ADR
+  - level: 6
+    name: reference_assets
+    description: 模板、示例、辅助说明
+
+resolution_rules:
+  - 高优先级覆盖低优先级
+  - 同优先级下，范围更窄者优先
+  - 同范围下，当前已批准工作单优先
+  - 若仍冲突，停止实现并先修正文档资产
+
+canonical_owners:
+  product_scope:
+    path: docs/product/PRD.md
+  product_vision:
+    path: docs/product/VISION.md
+  information_architecture:
+    path: docs/product/IA.md
+  page_behavior:
+    path: docs/design/PAGE_SPECS/HOME.md
+  interaction_rules:
+    path: docs/design/UX_RULES.md
+  architecture:
+    path: docs/engineering/ARCHITECTURE.md
+  data_model:
+    path: docs/engineering/DATA_MODEL.md
+  technical_decisions:
+    path: docs/engineering/TECH_DECISIONS/
+  roadmap:
+    path: docs/delivery/ROADMAP.md
+  maintenance:
+    path: docs/operations/MAINTENANCE.md
+  workflow:
+    path: docs/operations/CONTENT_WORKFLOW.md
+
+sync_requirements:
+  - trigger: 功能范围变化
+    must_update:
+      - docs/product/PRD.md
+      - docs/delivery/ROADMAP.md
+      - docs/delivery/work-items/<current>/review.md
+  - trigger: 页面结构或交互变化
+    must_update:
+      - docs/design/PAGE_SPECS/HOME.md
+      - docs/design/UX_RULES.md
+      - docs/delivery/work-items/<current>/review.md
+  - trigger: 数据字段变化
+    must_update:
+      - docs/engineering/DATA_MODEL.md
+      - docs/engineering/TECH_DECISIONS/
+      - docs/delivery/work-items/<current>/review.md
+  - trigger: 工程承接方式变化
+    must_update:
+      - docs/engineering/ARCHITECTURE.md
+      - docs/engineering/TECH_DECISIONS/
+      - docs/delivery/work-items/<current>/review.md
+  - trigger: 维护方式变化
+    must_update:
+      - docs/operations/MAINTENANCE.md
+      - docs/operations/CONTENT_WORKFLOW.md
