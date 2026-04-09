@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { FolderOpen, Sparkles } from "lucide-react";
 
 import CategoryTabs from "@/components/navigation/CategoryTabs";
 import SearchBar from "@/components/navigation/SearchBar";
@@ -83,7 +84,7 @@ export default function NavigationShell({
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       <SearchBar
         value={searchTerm}
         resultCount={filteredSites.length}
@@ -92,35 +93,24 @@ export default function NavigationShell({
         onReset={handleReset}
       />
 
-      <div className="space-y-3">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="text-sm font-medium text-slate-600">按分类筛选</h2>
-          <span className="text-sm text-slate-400">
-            置顶保存在当前浏览器
-          </span>
-        </div>
-        <CategoryTabs
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onSelect={setSelectedCategory}
-        />
-      </div>
+      <CategoryTabs
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onSelect={setSelectedCategory}
+      />
 
       {hasPinnedSites ? (
         <section className="space-y-4">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h2 className="text-xl font-semibold text-slate-950">常用置顶</h2>
-              <p className="mt-1 text-sm text-slate-500">
-                这些站点是你在当前浏览器里标记的高频入口。
-              </p>
-            </div>
-            <span className="text-sm text-slate-400">
-              {pinnedSites.length} 个常用站点
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+              <Sparkles className="h-4 w-4 text-amber-500" strokeWidth={2} />
+              常用置顶
+            </h2>
+            <span className="text-xs text-slate-500 dark:text-slate-400">
+              {pinnedSites.length} 个
             </span>
           </div>
-
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grid gap-3 lg:grid-cols-2">
             {pinnedSites.map((site) => (
               <SiteCard
                 key={site.id}
@@ -130,13 +120,19 @@ export default function NavigationShell({
               />
             ))}
           </div>
+          <hr className="border-slate-200 dark:border-slate-700" />
         </section>
       ) : null}
 
       {filteredSites.length === 0 ? (
-        <section className="rounded-[2rem] border border-dashed border-slate-300 bg-white/70 px-6 py-10 text-center shadow-[0_18px_40px_-30px_rgba(15,23,42,0.3)]">
-          <h2 className="text-lg font-semibold text-slate-900">没有找到匹配站点</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-500">
+        <section className="rounded-2xl border border-dashed border-slate-300 bg-white/70 px-6 py-12 text-center dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-300">
+            <FolderOpen className="h-5 w-5" strokeWidth={2} />
+          </div>
+          <h2 className="mt-3 text-base font-semibold text-slate-900 dark:text-slate-100">
+            没有找到匹配站点
+          </h2>
+          <p className="mt-1.5 text-sm text-slate-500 dark:text-slate-400">
             可以试试更短的关键词，或者切换到其他分类查看。
           </p>
         </section>
@@ -144,21 +140,16 @@ export default function NavigationShell({
 
       {visibleResultSites.length > 0 ? (
         <section className="space-y-4">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <h2 className="text-xl font-semibold text-slate-950">
-                {hasActiveFilters ? "筛选结果" : "全部站点"}
-              </h2>
-              <p className="mt-1 text-sm text-slate-500">
-                卡片会优先帮助你判断这个站点是否值得点开。
-              </p>
-            </div>
-            <span className="text-sm text-slate-400">
-              {visibleResultSites.length} 个结果
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+              <FolderOpen className="h-4 w-4" strokeWidth={2} />
+              {hasActiveFilters ? "筛选结果" : "全部站点"}
+            </h2>
+            <span className="text-xs text-slate-500 dark:text-slate-400">
+              {visibleResultSites.length} 个
             </span>
           </div>
-
-          <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
             {visibleResultSites.map((site) => (
               <SiteCard
                 key={site.id}
