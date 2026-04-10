@@ -60,14 +60,13 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={isDark ? "切换到浅色模式" : "切换到深色模式"}
       title={isDark ? "切换到浅色模式" : "切换到深色模式"}
-      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-xs font-medium text-slate-600 shadow-[0_1px_4px_-2px_rgba(15,23,42,0.1)] transition-all duration-150 ease-out hover:border-slate-300 hover:bg-slate-50 hover:text-slate-800 active:scale-95 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-700/80 dark:hover:text-slate-100"
+      className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-white/90 text-slate-600 shadow-[0_1px_4px_-2px_rgba(15,23,42,0.1)] transition-all duration-150 ease-out hover:border-slate-300 hover:bg-slate-50 hover:text-slate-800 active:scale-95 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-700/80 dark:hover:text-slate-100"
     >
       {isDark ? (
         <Sun className="h-[15px] w-[15px]" strokeWidth={2} />
       ) : (
         <Moon className="h-[15px] w-[15px]" strokeWidth={2} />
       )}
-      <span>{isDark ? "浅色" : "深色"}</span>
     </button>
   );
 }

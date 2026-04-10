@@ -1,4 +1,4 @@
-import type { SiteRecord } from "@/types/site";
+﻿import type { SiteRecord } from "@/types/site";
 
 export const sites: SiteRecord[] = [
   {
@@ -6,7 +6,7 @@ export const sites: SiteRecord[] = [
     name: "GitHub",
     url: "https://github.com",
     description: "代码仓库、Issue 与协作入口，适合集中管理开发项目。",
-    category: "常用",
+    category: "开发",
     tags: ["代码", "协作", "仓库"],
     sortOrder: 10,
     status: "active",
@@ -16,7 +16,7 @@ export const sites: SiteRecord[] = [
     name: "Notion",
     url: "https://www.notion.so",
     description: "统一整理笔记、项目清单和收藏内容的工作台。",
-    category: "常用",
+    category: "工具",
     tags: ["笔记", "管理", "效率"],
     sortOrder: 20,
     status: "active",

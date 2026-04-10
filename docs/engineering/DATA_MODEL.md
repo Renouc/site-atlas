@@ -1,4 +1,4 @@
-# 数据模型
+﻿# 数据模型
 
 ## 1. 目标
 
@@ -12,7 +12,6 @@
 type SiteStatus = "active" | "draft" | "archived";
 
 type SiteCategory =
-  | "常用"
   | "开发"
   | "AI / LLM"
   | "设计"
@@ -62,6 +61,7 @@ type PinnedSiteIds = string[];
 - 置顶偏好使用浏览器 `localStorage` 持久化
 - 若本地记录的 `id` 不存在、无效或状态不可见，应自动忽略
 - 置顶偏好不参与内容源版本控制
+- “常用”不进入 `SiteCategory`，仅通过偏好层表达
 
 ## 5. 状态语义
 
@@ -97,3 +97,5 @@ const example: SiteRecord = {
 - 若新增字段只服务低频场景，不进入核心模型
 - 结构变化必须同步更新页面规格与维护手册
 - 若新增的是个人偏好字段，优先考虑是否应进入偏好层而不是内容层
+
+

@@ -1,7 +1,6 @@
-export const ALL_CATEGORY = "全部" as const;
+﻿export const ALL_CATEGORY = "全部" as const;
 
 export const SITE_CATEGORIES = [
-  "常用",
   "开发",
   "AI / LLM",
   "设计",
