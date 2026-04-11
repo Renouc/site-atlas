@@ -18,9 +18,10 @@ export default function FaviconAvatar({
 }: FaviconAvatarProps) {
   const [errored, setErrored] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const loadedRef = useRef(false);
 
   useEffect(() => {
-    if (!domain || errored) return;
+    if (!domain || errored || loadedRef.current) return;
 
     timerRef.current = setTimeout(() => setErrored(true), LOAD_TIMEOUT_MS);
     return () => {
@@ -45,7 +46,7 @@ export default function FaviconAvatar({
           width={26}
           height={26}
           className="h-[26px] w-[26px] object-contain"
-          onLoad={clearTimer}
+          onLoad={() => { loadedRef.current = true; clearTimer(); }}
           onError={() => { clearTimer(); setErrored(true); }}
         />
       </div>
