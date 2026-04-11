@@ -44,7 +44,7 @@ export default function BackgroundPattern() {
 
             {/* F3 — 霓虹青，大，右上 */}
             <g
-              transform="translate(258,96) rotate(47)"
+              transform="translate(240,96) rotate(47)"
               style={{ filter: "drop-shadow(0 0 7px #00e5ff)" }}
               opacity="0.44"
             >
@@ -84,9 +84,9 @@ export default function BackgroundPattern() {
               <circle r="2" fill="#ffe4f2" />
             </g>
 
-            {/* F6 — 霓虹青，极小，贴右边缘（与下一 tile 无缝衔接） */}
+            {/* F6 — 霓虹青，极小，右侧 */}
             <g
-              transform="translate(292,158) rotate(12)"
+              transform="translate(272,158) rotate(12)"
               style={{ filter: "drop-shadow(0 0 3px #00e5ff)" }}
               opacity="0.22"
             >
