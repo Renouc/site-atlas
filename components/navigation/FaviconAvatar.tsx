@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 type FaviconAvatarProps = {
   domain: string;
@@ -8,33 +8,12 @@ type FaviconAvatarProps = {
   avatarClass: string;
 };
 
-/** 超过此时间仍未加载完成，直接降级为字母头像 */
-const LOAD_TIMEOUT_MS = 3000;
-
 export default function FaviconAvatar({
   domain,
   initial,
   avatarClass,
 }: FaviconAvatarProps) {
   const [errored, setErrored] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const loadedRef = useRef(false);
-
-  useEffect(() => {
-    if (!domain || errored || loadedRef.current) return;
-
-    timerRef.current = setTimeout(() => setErrored(true), LOAD_TIMEOUT_MS);
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [domain, errored]);
-
-  function clearTimer() {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  }
 
   if (!errored && domain) {
     return (
@@ -46,8 +25,7 @@ export default function FaviconAvatar({
           width={26}
           height={26}
           className="h-[26px] w-[26px] object-contain"
-          onLoad={() => { loadedRef.current = true; clearTimer(); }}
-          onError={() => { clearTimer(); setErrored(true); }}
+          onError={() => setErrored(true)}
         />
       </div>
     );
