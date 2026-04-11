@@ -1,9 +1,11 @@
 /**
- * Cloudflare Pages Function: /api/favicon?domain=example.com
+ * Next.js Route Handler: GET /api/favicon?domain=example.com
  *
- * 在 CF 边缘节点代理 favicon，避免客户端直连 Google 被 GFW 阻断。
+ * 在边缘节点代理 favicon，避免客户端直连 Google 被 GFW 阻断。
  * 降级链：Google S2 → DuckDuckGo → 目标站 favicon.ico → 404
  */
+
+export const runtime = "edge";
 
 const CACHE_CONTROL =
   "public, max-age=86400, s-maxage=604800, stale-while-revalidate=3600";
@@ -36,11 +38,7 @@ async function tryFetch(url: string, timeoutMs = 5000): Promise<Response | null>
   return null;
 }
 
-export async function onRequestGet({
-  request,
-}: {
-  request: Request;
-}): Promise<Response> {
+export async function GET(request: Request): Promise<Response> {
   const domain = new URL(request.url).searchParams.get("domain") ?? "";
 
   if (!isValidDomain(domain)) {
