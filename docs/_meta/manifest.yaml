@@ -1,11 +1,11 @@
 version: 1
-updated_at: 2026-04-09
+updated_at: 2026-04-12
 
 entrypoints:
   repo_rules: AGENTS.md
   docs_home: docs/README.md
   constitution: docs/_meta/CONSTITUTION.md
-  active_work_item: docs/delivery/work-items/WI-002-homepage-mvp/
+  active_work_item: docs/delivery/work-items/WI-004-doc-sync/
 
 assets:
   - id: foundation.project-charter
@@ -227,7 +227,7 @@ assets:
     authority: active_work_item
     path: docs/delivery/work-items/WI-002-homepage-mvp/
     scope: current-task
-    status: active
+    status: completed
     upstream:
       - product.prd
       - product.ia
@@ -241,6 +241,42 @@ assets:
       - 首页 MVP 计划
       - 首页 MVP 验收
       - 首页 MVP 复盘
+
+  - id: delivery.wi-003
+    type: work-item
+    authority: active_work_item
+    path: docs/delivery/work-items/WI-003-ui-motion-polish/
+    scope: current-task
+    status: completed
+    upstream:
+      - design.ux-rules
+      - design.home-page-spec
+      - engineering.architecture
+    owns:
+      - 主题切换链路
+      - 首页视觉整理
+      - UI 体验复盘
+
+  - id: delivery.wi-004
+    type: work-item
+    authority: active_work_item
+    path: docs/delivery/work-items/WI-004-doc-sync/
+    scope: current-task
+    status: active
+    upstream:
+      - product.prd
+      - product.ia
+      - design.ux-rules
+      - design.home-page-spec
+      - engineering.architecture
+      - engineering.data-model
+      - operations.maintenance
+      - operations.content-workflow
+      - delivery.roadmap
+    owns:
+      - 文档同步边界
+      - 权威资产回写
+      - 项目状态校正
 
 templates:
   - templates/doc-template-prd.md

@@ -1,66 +1,46 @@
-﻿# 数据模型
+# 数据模型
 
 ## 1. 目标
 
-定义 V1 首页导航所需的最小稳定字段集，既保证表达能力，也控制维护成本。当前模型需要明确区分站点内容事实与个人偏好。
+- 用最少字段承载首页导航所需内容事实
+- 将站点内容与浏览器本地偏好分层
+- 避免为展示便利重复维护可从现有字段派生的信息
 
 ## 2. 核心实体
 
 ### SiteRecord
 
-```ts
-type SiteStatus = "active" | "draft" | "archived";
-
-type SiteCategory =
-  | "开发"
-  | "AI / LLM"
-  | "设计"
-  | "工具"
-  | "学习"
-  | "资讯"
-  | "其他";
-
-interface SiteRecord {
-  id: string;
-  name: string;
-  url: string;
-  description: string;
-  category: SiteCategory;
-  tags: string[];
-  note?: string;
-  sortOrder?: number;
-  status: SiteStatus;
-}
-```
+站点内容实体，作为仓库内的单一事实源。
 
 ### PinnedSiteIds
 
-```ts
-const PINNED_SITES_STORAGE_KEY = "site-atlas:pinned-site-ids";
+浏览器本地偏好实体，用于记录当前浏览器的置顶站点顺序。
 
-type PinnedSiteIds = string[];
-```
+### ThemePreference
 
-`PinnedSiteIds` 是浏览器本地偏好模型，不属于仓库内内容源，不应写回 `SiteRecord`。
+浏览器本地偏好实体，用于记录当前浏览器选择的主题模式；缺省时跟随系统主题。
 
 ## 3. 字段约束
 
 - `id`：稳定、唯一，不因展示名称变化而变化
 - `name`：站点展示名称，要求短且可识别
-- `url`：完整链接，必须可直接跳转
+- `url`：完整链接，必须可直接跳转，同时作为域名提取与 favicon 查询来源
 - `description`：一句话说明用途，不能为空
 - `category`：必须属于受控分类集合
 - `tags`：0 个或多个稳定标签，优先复用
-- `note`：补充说明，可选
+- `note`：补充说明，可选，仅在确有额外价值时填写
 - `sortOrder`：手动排序字段，可选
 - `status`：用于控制是否展示或归档
+- `domain`：展示时从 `url` 派生，不作为独立维护字段
+- `favicon`：展示时基于派生域名动态获取，不作为内容源字段
 
 ## 4. 偏好层约束
 
-- 置顶偏好仅保存站点 `id`
-- 置顶偏好使用浏览器 `localStorage` 持久化
+- `PinnedSiteIds` 仅保存站点 `id`
+- `PinnedSiteIds` 使用浏览器 `localStorage` 持久化
+- `ThemePreference` 为 `light | dark` 之一；缺省时跟随系统主题
+- 主题与置顶均属于浏览器本地偏好，不参与站点内容源版本控制
 - 若本地记录的 `id` 不存在、无效或状态不可见，应自动忽略
-- 置顶偏好不参与内容源版本控制
 - “常用”不进入 `SiteCategory`，仅通过偏好层表达
 
 ## 5. 状态语义
@@ -79,23 +59,30 @@ type PinnedSiteIds = string[];
 
 ## 7. 示例
 
+### SiteRecord 示例
+
 ```ts
-const example: SiteRecord = {
-  id: "openai-docs",
-  name: "OpenAI Docs",
-  url: "https://platform.openai.com/docs",
-  description: "OpenAI 平台官方文档，查询模型、API 与实践指南。",
-  category: "AI / LLM",
-  tags: ["文档", "API", "LLM"],
+{
+  id: "github",
+  name: "GitHub",
+  url: "https://github.com",
+  description: "代码仓库与协作入口",
+  category: "开发",
+  tags: ["代码", "协作", "仓库"],
+  sortOrder: 10,
   status: "active",
-};
+}
 ```
+
+### 本地偏好示例
+
+- `PinnedSiteIds`：`["github", "notion"]`
+- `ThemePreference`：`"dark"`
 
 ## 8. 演进规则
 
 - 如新增字段，需先说明其用户价值与维护成本
 - 若新增字段只服务低频场景，不进入核心模型
-- 结构变化必须同步更新页面规格与维护手册
+- 展示信息优先判断能否从现有字段派生，例如域名与 favicon
+- 结构变化必须同步更新页面规格、架构说明与维护手册
 - 若新增的是个人偏好字段，优先考虑是否应进入偏好层而不是内容层
-
-
