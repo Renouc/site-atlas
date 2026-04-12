@@ -50,6 +50,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Commit Message Rule
 
-- 默认使用 `emoji + 简短中文说明` 的格式
+- 默认使用 `type: emoji 简短中文说明` 的格式
+- `type` 遵循 Conventional Commits，例如 `feat`、`fix`、`docs`、`refactor`、`chore`
 - 如无特殊要求，优先保持单行、易读、能直接表达本次提交目的
-- 示例：`🧹 保留书签源数据采集与AI说明`
+- 示例：`feat: ✨ 新增高质量站点数据`
