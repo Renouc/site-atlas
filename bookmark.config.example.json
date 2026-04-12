@@ -1,0 +1,5 @@
+{
+  "blacklist": {
+    "domains": ["example.com", "10.", "127.", "localhost"]
+  }
+}

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "bookmarks:extract": "node scripts/bookmarks/extract.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
