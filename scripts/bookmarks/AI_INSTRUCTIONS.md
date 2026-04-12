@@ -6,7 +6,7 @@
 2. 输出清洗、过滤、去重后的标准化结果
 3. 为后续 AI 整理提供明确约束
 
-不在当前脚本阶段直接生成正式发布数据。
+当前阶段不直接生成正式发布数据。
 
 ## 输入文件
 
@@ -17,6 +17,31 @@
 - `.local/bookmarks/normalized.json`：后续整理的主输入
 
 后续 AI 应优先使用 `.local/bookmarks/normalized.json`。
+
+## URL 精确排除规则
+
+如果存在 `.local/bookmarks/normalized.exclude.json`，AI 在开始整理前必须先读取它。
+
+该文件只用于“整理阶段排除”，不用于“采集阶段过滤”，也不能反向修改 `.local/bookmarks/normalized.json`。
+
+建议格式如下：
+
+```json
+{
+  "urls": [
+    "https://example.com/page-a",
+    "https://example.com/page-b"
+  ]
+}
+```
+
+约束如下：
+
+- 只按完整 URL 精确匹配
+- `urls` 中的值应直接复制自 `.local/bookmarks/normalized.json` 的 `url` 字段
+- 命中排除列表的记录不得进入最终展示数据
+- 排除规则只影响本轮整理结果，不修改源数据
+- 如果某个站点已经在正式数据中存在，但本轮又命中排除列表，默认本轮不新增、不覆盖，并提示人工确认
 
 ## 源数据字段
 
@@ -34,7 +59,7 @@
 - `duplicateCount`：重复次数
 - `sourceSignals`：多来源信号
 
-这些字段是“线索”，不是最终渲染数据。
+这些字段是线索，不是最终渲染数据。
 
 ## 整理目标
 
@@ -148,11 +173,12 @@ type SiteRecord = {
 建议 AI 按以下顺序处理：
 
 1. 读取 `.local/bookmarks/normalized.json`
-2. 基于 URL 去重并识别已有正式站点
-3. 挑选高价值、公开、可长期展示的网站
-4. 为候选站点补齐分类、标签、描述
-5. 对信息不足的站点补充访问页面内容
-6. 输出符合 `SiteRecord[]` 的最终结果
+2. 如果存在 `.local/bookmarks/normalized.exclude.json`，先按其中的 `urls` 精确排除
+3. 基于 URL 去重并识别已有正式站点
+4. 挑选高价值、公开、可长期展示的网站
+5. 为候选站点补齐分类、标签、描述
+6. 对信息不足的站点补充访问页面内容
+7. 输出符合 `SiteRecord[]` 的最终结果
 
 ## 质量底线
 
