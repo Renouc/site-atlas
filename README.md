@@ -14,7 +14,7 @@ pnpm dev
 
 - 仓库级执行入口：`AGENTS.md`
 - 知识治理入口：`docs/README.md`
-- 当前活动工作单：`docs/delivery/work-items/WI-004-doc-sync/`
+- 当前活动工作单：`docs/delivery/work-items/WI-005-site-curation/`
 - 当前核心目标：在已完成首页 MVP 的基础上，推进真实数据接入与维护效率增强
 
 ## 当前状态

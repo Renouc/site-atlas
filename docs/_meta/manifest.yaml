@@ -5,7 +5,7 @@ entrypoints:
   repo_rules: AGENTS.md
   docs_home: docs/README.md
   constitution: docs/_meta/CONSTITUTION.md
-  active_work_item: docs/delivery/work-items/WI-004-doc-sync/
+  active_work_item: docs/delivery/work-items/WI-005-site-curation/
 
 assets:
   - id: foundation.project-charter
@@ -262,7 +262,7 @@ assets:
     authority: active_work_item
     path: docs/delivery/work-items/WI-004-doc-sync/
     scope: current-task
-    status: active
+    status: completed
     upstream:
       - product.prd
       - product.ia
@@ -277,6 +277,22 @@ assets:
       - 文档同步边界
       - 权威资产回写
       - 项目状态校正
+
+  - id: delivery.wi-005
+    type: work-item
+    authority: active_work_item
+    path: docs/delivery/work-items/WI-005-site-curation/
+    scope: current-task
+    status: active
+    upstream:
+      - engineering.data-model
+      - operations.maintenance
+      - operations.content-workflow
+      - delivery.roadmap
+    owns:
+      - 开发站点补充
+      - 官方文档归一化
+      - 轻量推荐筛选
 
 templates:
   - templates/doc-template-prd.md
