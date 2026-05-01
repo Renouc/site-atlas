@@ -5,6 +5,7 @@
 - 已新增 `ts-node`、`Zustand`、`Electron`、`Taro`、`ahooks`、`es-toolkit`、`Zod`、`Dotenv`、`LangGraph JS Docs`、`TanStack Query`、`SWR`、`Elysia` 共 12 个条目
 - 已补充 `Vite`、`Bun Docs`、`Vue.js`、`React Native`、`Expo` 共 5 个开发类条目
 - 已补充 `Conventional Commits`、`Cloudflare`、`RxJS`、`PixiJS`、`Git 中文` 共 5 个开发类条目
+- 已补充 `Etherscan Docs`、`Alchemy Docs`、`Gas.zip`、`ChainList`、`React SVGR`、`Starship`、`Ghostty` 共 7 个开发与工具类条目
 - 已将当前活动工作单切换为 `WI-005`，并同步 `README.md` 入口
 - 已保持 `SiteRecord` 模型、现有分类与站点维护规则不变
 
@@ -20,10 +21,15 @@
 - `RxJS` 使用官方主站 `https://rxjs.dev/`，作为响应式编程与文档入口
 - `PixiJS` 使用官方主站 `https://pixijs.com/`，兼顾文档、教程与示例导航
 - `Git 中文` 使用用户提供的中文官方入口 `https://git-scm.cn/`，覆盖安装、教程、工具与参考文档
+- `Alchemy` 使用 `https://www.alchemy.com/docs`，替代产品首页，直接命中文档与开发接入场景
+- `React SVGR` 使用 `https://react-svgr.com/docs/getting-started/`，替代站点首页，直接进入文档起步页
+- `Ghostty` 使用 `https://ghostty.org/docs`，替代产品首页，优先服务配置与使用查阅
+- `Starship` 保留用户提供的中文入口 `https://starship.rs/zh-CN/`
 
 ## 保留意见
 
-- 本轮没有需要直接排除的站点，均属于高频或高价值官方资源
+- 本轮新增候选中，`PixiJS` 已在 `data/sites.ts` 中存在，因此不重复新增
+- Web3 相关站点当前数量尚不足以新增一级分类，暂通过 `Web3`、`EVM`、`RPC`、`Gas`、`跨链` 等标签聚合
 - `ts-node` 适合兼容既有 Node.js 工作流，但若目标只是现代 TypeScript 脚本执行，通常会优先考虑已存在的 `tsx`
 - `Dotenv` 可作为环境变量生态入口，但不应被误解为前端敏感信息保护方案；更适合放在配置管理语境下理解
 - `Cloudflare` 当前落库为官方中文主站；若后续使用场景明显偏向开发文档，可再评估是否补充 `developers.cloudflare.com` 作为更直接入口
