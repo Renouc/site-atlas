@@ -6,6 +6,7 @@
 - 已补充 `Vite`、`Bun Docs`、`Vue.js`、`React Native`、`Expo` 共 5 个开发类条目
 - 已补充 `Conventional Commits`、`Cloudflare`、`RxJS`、`PixiJS`、`Git 中文` 共 5 个开发类条目
 - 已补充 `Etherscan Docs`、`Alchemy Docs`、`Gas.zip`、`ChainList`、`React SVGR`、`Starship`、`Ghostty` 共 7 个开发与工具类条目
+- 已补充 `CryptoRank`、`深潮 TechFlow` 共 2 个 Web3 工具与资讯类条目
 - 已将当前活动工作单切换为 `WI-005`，并同步 `README.md` 入口
 - 已保持 `SiteRecord` 模型、现有分类与站点维护规则不变
 
@@ -25,11 +26,14 @@
 - `React SVGR` 使用 `https://react-svgr.com/docs/getting-started/`，替代站点首页，直接进入文档起步页
 - `Ghostty` 使用 `https://ghostty.org/docs`，替代产品首页，优先服务配置与使用查阅
 - `Starship` 保留用户提供的中文入口 `https://starship.rs/zh-CN/`
+- `CryptoRank` 保留用户提供的中文入口 `https://cryptorank.io/zh`，直接覆盖加密市场数据与分析场景
+- `深潮 TechFlow` 保留用户提供的中文入口 `https://www.techflowpost.com/zh-CN`，直接覆盖中文 Web3 资讯与深度内容场景
 
 ## 保留意见
 
 - 本轮新增候选中，`PixiJS` 已在 `data/sites.ts` 中存在，因此不重复新增
 - Web3 相关站点当前数量尚不足以新增一级分类，暂通过 `Web3`、`EVM`、`RPC`、`Gas`、`跨链` 等标签聚合
+- `CryptoRank` 当前归入 `工具`，因为核心使用场景是行情、排行与数据分析；`深潮 TechFlow` 归入 `资讯`，因为核心使用场景是内容阅读与行业动态跟进
 - `ts-node` 适合兼容既有 Node.js 工作流，但若目标只是现代 TypeScript 脚本执行，通常会优先考虑已存在的 `tsx`
 - `Dotenv` 可作为环境变量生态入口，但不应被误解为前端敏感信息保护方案；更适合放在配置管理语境下理解
 - `Cloudflare` 当前落库为官方中文主站；若后续使用场景明显偏向开发文档，可再评估是否补充 `developers.cloudflare.com` 作为更直接入口
