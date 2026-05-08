@@ -332,6 +332,16 @@ export const sites: SiteRecord[] = [
     status: "active",
   },
   {
+    id: "ethereum-zh",
+    name: "Ethereum.org 中文",
+    url: "https://ethereum.org/zh/",
+    description: "以太坊官方中文入口，适合理解以太坊基础、生态、钱包、安全、开发者资源与路线图。",
+    category: "学习",
+    tags: ["Web3", "以太坊", "官方文档"],
+    sortOrder: 335,
+    status: "active",
+  },
+  {
     id: "xiaolin-coding",
     name: "小林coding",
     url: "https://www.xiaolincoding.com/",
@@ -719,6 +729,16 @@ export const sites: SiteRecord[] = [
     category: "开发",
     tags: ["边缘平台", "CDN", "安全"],
     sortOrder: 720,
+    status: "active",
+  },
+  {
+    id: "recaptcha-docs",
+    name: "reCAPTCHA Docs",
+    url: "https://docs.cloud.google.com/recaptcha/docs/overview?hl=zh-cn",
+    description: "Google Cloud reCAPTCHA 官方文档，适合为网站登录、表单和关键操作接入人机验证、风险评估与 Bot 防护。",
+    category: "开发",
+    tags: ["人机验证", "Bot 防护", "安全"],
+    sortOrder: 725,
     status: "active",
   },
   {
